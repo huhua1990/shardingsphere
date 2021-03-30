@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: shardingSphere
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: sharding-databases # sharding-tables sharding-databases  sharding-databases-tables
+
+
+server:
+  servlet:
+    context-path: /sharding
+  port: 18090
+
+logging:
+  com:
+    cp3:
+      shardingsphere:
+        level: debug
+
+mybatis:
+  #mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.cp3.shardingsphere.entity
+  configuration:
+    map-underscore-to-camel-case: true

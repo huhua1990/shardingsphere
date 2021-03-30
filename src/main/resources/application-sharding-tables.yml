@@ -1,0 +1,38 @@
+#配置分表不分库
+spring:
+  shardingsphere:
+    props:
+      sql.show: true # 开启SQL显示，默认值: false
+      executor.size: 2 #工作线程数量，默认值: CPU核数
+    #配置数据源
+    datasource:
+      names: ds0
+      ds0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://10.45.50.241:3308/ds0
+        username: root
+        password: root
+
+    sharding:
+      tables:
+        order:
+          actual-data-nodes: ds0.order$->{0..1}
+          #指定主键生成策略为 SNOWFLAKE
+#          key-generator:
+#            column: order_id
+#            type: SNOWFLAKE
+#            props:
+#              worker:
+#                id: 123
+          table-strategy:
+            ##配置order表分库策略（inline-基于行表达式的分片算法）
+#            inline:
+#              sharding-column: order_id
+#              algorithm-expression: order$->{order_id % 2}
+            # #配置order表分库策略（standard-基于的标准分片算法）
+            standard:
+              sharding-column: order_id
+              precise-algorithm-class-name: com.cp3.shardingsphere.utils.OrderTablesPreciseShardingAlgorithm
+
+
