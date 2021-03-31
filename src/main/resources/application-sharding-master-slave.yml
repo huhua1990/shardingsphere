@@ -1,0 +1,46 @@
+#配置分库分表
+spring:
+  shardingsphere:
+    props:
+      sql.show: true # 开启SQL显示，默认值: false
+      executor.size: 2 #工作线程数量，默认值: CPU核数
+    #多从库配置负载均衡
+    masterslave:
+      load-balance-algorithm-type: ROUND_ROBIN
+    #配置数据源
+    datasource:
+      #定义主从，通过修改mysql.cnf文件配置主从m0-s1关系
+      names: m0,s0,s1
+      m0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://10.45.50.241:3309/m0
+        username: root
+        password: root
+      s0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://10.45.50.241:3310/s0
+        username: root
+        password: root
+      s1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://10.45.50.241:3311/s1
+        username: root
+        password: root
+
+    sharding:
+      tables:
+        order:
+          #分表策略 如需多个主库时，可增加主表的分库逻辑
+          actual-data-nodes: m0.order
+      master-slave-rules:
+        m0:
+          master-data-source-name: m0
+          slave-data-source-name: s0,s1
+
+
+
+
+

@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
     public R createOrder(OrderDTO orderDTO) {
         Order order = new Order();
         BeanUtil.copyProperties(orderDTO, order);
-        order.setOrderId(RandomUtil.randomNumbers(6));
+        order.setOrderId(Long.valueOf(RandomUtil.randomNumbers(2)));
         order.setOrderNo("NO"+RandomUtil.randomNumbers(6));
         order.setOrderStatus("1");
         orderMapper.insert(order);

@@ -28,7 +28,7 @@ spring:
             #配置order表分库策略（inline-基于行表达式的分片算法）
             inline:
               sharding-column: order_id
-              algorithm-expression: order$->{order_id % 2}
+              algorithm-expression: ds$->{order_id % 2}
             #配置order表分库策略（standard-基于的标准分片算法）
 #            standard:
 #              sharding-column: order_id

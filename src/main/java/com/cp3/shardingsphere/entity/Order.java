@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Data
 public class Order implements Serializable {
-    private String orderId;
+    private Long orderId;
     private String orderNo;
     private String goodName;
     private String buyer;

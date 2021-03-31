@@ -118,11 +118,11 @@
             <version>${sharding-jdbc.version}</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-jdbc-core</artifactId>
             <version>${sharding-jdbc.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!--<dependency>
             <groupId>io.shardingsphere</groupId>

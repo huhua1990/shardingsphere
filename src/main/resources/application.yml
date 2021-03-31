@@ -4,7 +4,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   profiles:
-    active: sharding-databases # sharding-tables sharding-databases  sharding-databases-tables
+    active: sharding-tables # sharding-tables sharding-databases  sharding-databases-tables
 
 
 server:
